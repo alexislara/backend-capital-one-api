@@ -1,0 +1,43 @@
+services:
+  django:
+    restart: unless-stopped
+    container_name: django-app-chat-bot
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_HOST
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    networks:
+      - reverse-proxy
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres:alpine
+    restart: unless-stopped
+    container_name: db-capital-one-ia
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+    environment:
+      - POSTGRES_HOST
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    networks:
+      - reverse-proxy
+
+volumes:
+  postgres_data:
+
+networks:
+  reverse-proxy:
+     external: true

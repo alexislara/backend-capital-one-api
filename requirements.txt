@@ -1,0 +1,15 @@
+Django
+django-filter
+djangorestframework
+django-cors-headers
+django-extensions
+drf-yasg
+drf-yasg[validation]
+drf-standardized-errors
+markdown
+gunicorn
+setuptools
+Pillow
+psycopg
+psycopg2
+psycopg2-binary
